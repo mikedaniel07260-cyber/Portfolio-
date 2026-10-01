@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <style> 
+        :root {
+    --background:#05070d;
+    --background-2:#090d17;
+    --card:rgba(255,255,255,.045);
+    --white:#f8fafc;
+    --text:#d8deea;
+    --muted:#8994a8;
+    --blue:#3b82f6;
+    --cyan:#22d3ee;
+    --purple:#8b5cf6;
+    --border:rgba(255,255,255,.09);
+    --container:1200px;
+    --radius:20px;
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth
+}
+html{
+    scroll-padding-top:80px
+}
+body{
+    font-family:"Arial",sans-serif;
+    background:var(--background);
+    color:var(--white);
+    line-height:1.6;
+    overflow-x:hidden
+}
+body::before,body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    filter:blur(180px);
+    opacity:.11;
+    pointer-events:none;
+    z-index:-1
+}
+body::before{
+    top:-250px;
+    left:-200px;
+    background:var(--blue)
+}
+body::after{
+    right:-250px;
+    bottom:-250px;
+    background:var(--purple)
+}
+a{
+    color:inherit;
+    text-decoration:none
+}
+button,input,textarea{
+    font-family:inherit
+}
+.container{
+    width:min(90%,var(--container));
+    margin:auto
+}
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:75px;
+    z-index:1000;
+    background:rgba(5,7,13,.72);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border)
+}
+.nav{
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between
+}
+.logo{
+    font-family:"Bell MT",sans-serif;
+    font-size:1.4rem;
+    font-weight:700;
+    letter-spacing:-1px
+}
+.logo span{
+    color:var(--blue);
+    text-shadow:0 0 15px rgba(59,130,246,.7)
+}
+nav{
+    display:flex;
+    gap:30px
+}
+nav a{
+    color:var(--muted);
+    font-size:.85rem;
+    transition:.3s
+}
+nav a:hover{
+    color:white
+}
+.menu-btn{
+    display:none;
+    border:none;
+    background:none;
+    color:white;
+    font-size:1.5rem;
+    cursor:pointer
+}
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:100px;
+    position:relative
+}
+.hero-content{
+    max-width:900px
+}
+.availability{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:8px 14px;
+    border-radius:50px;
+    border:1px solid rgba(59,130,246,.25);
+    background:rgba(59,130,246,.06);
+    color:#a8c8ff;
+    font-size:.78rem;
+    margin-bottom:30px
+}
+.availability span{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#22c55e;
+    box-shadow:0 0 12px #22c55e
+}
+.hero-intro{
+    color:var(--blue);
+    font-weight:600;
+    margin-bottom:8px
+}
+.hero h1{
+    font-family:"SpaceGrotesk",sans-serif;
+    font-size:clamp(3.5rem,8vw,7rem);
+    line-height:.95;
+    letter-spacing:-5px;
+    margin-bottom:30px
+}
+.gradient{
+    background:linear-gradient(90deg,var(--blue),var(--cyan),var(--purple));
+    background-size:200% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:gradientMove 5s linear infinite
+}
+@keyframes gradientMove{
+    0%{
+        background-position:0 center
+    }
+    100%{
+        background-position:200% center
+    }
+}
+.hero-description{
+    max-width:680px;
+    color:var(--muted);
+    font-size:1.05rem;
+    margin-bottom:35px
+}
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:60px
+}
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:13px 20px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    font-weight:600;
+    font-size:.85rem;
+    cursor:pointer;
+    transition:.3s
+}
+.btn-primary{
+    color:white;
+    border:none;
+    background:linear-gradient(135deg,var(--blue),var(--purple));
+    box-shadow:0 10px 30px rgba(59,130,246,.2)
+}
+.btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 40px rgba(59,130,246,.35)
+}
+.btn-secondary{
+    background:rgba(255,255,255,.04)
+}
+.btn-secondary:hover{
+    background:rgba(255,255,255,.08);
+    transform:translateY(-3px)
+}
+.hero-stats{
+    display:flex;
+    gap:150px;
+    font-size: .70rem;
+}
+.hero-stats div{
+    display:flex;
+    flex-direction:column
+}
+.hero-stats strong{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:1.8rem
+}
+.hero-stats span{
+    color:var(--muted);
+    font-size:.75rem
+}
+.section{
+    padding:120px 0
+}
+.dark-section{
+    background:linear-gradient(180deg,transparent,rgba(255,255,255,.018),transparent)
+}
+.section-heading{
+    margin-bottom:50px
+}
+.section-heading>span{
+    display:block;
+    color:var(--blue);
+    font-size:.72rem;
+    letter-spacing:2px;
+    font-weight:700;
+    margin-bottom:12px
+}
+.section-heading h2{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:clamp(2.3rem,5vw,4rem);
+    letter-spacing:-2px
+}
+.section-heading h2 span{
+    color:var(--blue);
+    
+}
+.section-heading p{
+    color:var(--muted);
+    margin-top:10px
+}
+.about-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:30px;
+    align-items:stretch
+}
+.about-text{
+    padding-right:40px
+}
+.about-text p{
+    color:var(--muted);
+    margin-bottom:20px;
+    max-width:650px
+}
+.about-text .big-text{
+    color:white;
+    font-size:1.5rem;
+    line-height:1.4
+}
+.about-card{
+    position:relative;
+    padding:35px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:var(--radius);
+    overflow:hidden
+}
+.about-card::before{
+    content:"";
+    position:absolute;
+    width:150px;
+    height:150px;
+    top:-70px;
+    right:-70px;
+    background:var(--purple);
+    filter:blur(80px);
+    opacity:.25
+}
+.card-number{
+    color:var(--blue);
+    font-family:"Space Grotesk";
+    font-size:.8rem;
+    margin-bottom:50px
+}
+.about-card h3{
+    font-family:"Space Grotesk";
+    font-size:1.7rem;
+    margin-bottom:12px
+}
+.about-card p{
+    color:var(--muted)
+}
+.skills-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px
+}
+.skill-card{
+    padding:25px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:15px
+}
+.skill-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px
+}
+.skill-header h3{
+    font-size:.9rem
+}
+.skill-header span{
+    color:var(--blue);
+    font-size:.8rem
+}
+.progress{
+    width:100%;
+    height:6px;
+    background:rgba(255,255,255,.06);
+    border-radius:20px;
+    overflow:hidden
+}
+.progress-bar{
+    height:100%;
+    width:0;
+    border-radius:20px;
+    background:linear-gradient(90deg,var(--blue),var(--cyan),var(--purple));
+    transition:width 1.5s ease
+}
+.filters{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:35px
+}
+.filter{
+    padding:9px 17px;
+    border-radius:50px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.04);
+    color:var(--muted);
+    cursor:pointer;
+    transition:.3s
+}
+.filter:hover,.filter.active{
+    color:white;
+    background:var(--blue);
+    border-color:var(--blue)
+}
+.projects-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px
+}
+.project{
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:var(--radius);
+    overflow:hidden;
+    transition:.4s
+}
+.project:hover{
+    transform:translateY(-7px);
+    border-color:rgba(59,130,246,.35);
+    box-shadow:0 20px 50px rgba(0,0,0,.25)
+}
+.project-image{
+    height:200px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(circle,rgba(59,130,246,.25),transparent 65%),#080c15
+}
+.project-image>span{
+    position:absolute;
+    top:15px;
+    left:15px;
+    color:rgba(255,255,255,.35);
+    font-size:.75rem
+}
+.project-icon{
+    font-family:"Space Grotesk";
+    font-size:3rem;
+    color:var(--blue);
+    text-shadow:0 0 30px rgba(59,130,246,.6)
+}
+.project-info{
+    padding:25px
+}
+.project-category{
+    color:var(--cyan);
+    font-size:.65rem;
+    font-weight:700;
+    letter-spacing:1.5px
+}
+.project-info h3{
+    font-family:"Space Grotesk";
+    font-size:1.25rem;
+    margin:8px 0
+}
+.project-info p{
+    color:var(--muted);
+    font-size:.85rem;
+    margin-bottom:18px
+}
+.technologies{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+    margin-bottom:20px
+}
+.technologies span{
+    padding:5px 8px;
+    background:rgba(255,255,255,.06);
+    border-radius:6px;
+    color:#b7c1d2;
+    font-size:.65rem
+}
+.project-links{
+    display:flex;
+    gap:15px
+}
+.project-links a{
+    color:#9ec4ff;
+    font-size:.75rem;
+    font-weight:600
+}
+.project-links a:hover{
+    color:white
+}
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    border:1px solid var(--border)
+}
+.service{
+    padding:35px 25px;
+    border-right:1px solid var(--border);
+    transition:.3s
+}
+.service:last-child{
+    border-right:none
+}
+.service:hover{
+    background:rgba(255,255,255,.03)
+}
+.service-number{
+    color:var(--blue);
+    font-size:.7rem;
+    margin-bottom:45px
+}
+.service h3{
+    font-family:"Space Grotesk";
+    margin-bottom:12px
+}
+.service p{
+    color:var(--muted);
+    font-size:.8rem
+}
+.contact-box{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    padding:50px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:var(--radius)
+}
+.contact-left>span{
+    color:var(--blue);
+    font-size:.7rem;
+    letter-spacing:2px;
+    font-weight:700
+}
+.contact-left h2{
+    font-family:"Space Grotesk";
+    font-size:clamp(2rem,4vw,3.5rem);
+    line-height:1;
+    margin:20px 0
+}
+.contact-left>p{
+    color:var(--muted);
+    max-width:450px;
+    margin-bottom:35px
+}
+.contact-details{
+    display:grid;
+    gap:18px
+}
+.contact-details small{
+    display:block;
+    color:var(--muted);
+    font-size:.7rem
+}
+.contact-details strong{
+    font-size:.85rem
+}
+form{
+    display:grid;
+    gap:13px
+}
+input,textarea{
+    width:100%;
+    padding:14px 16px;
+    background:rgba(255,255,255,.04);
+    color:white;
+    border:1px solid var(--border);
+    border-radius:10px;
+    outline:none;
+    transition:.3s
+}
+input:focus,textarea:focus{
+    border-color:var(--blue);
+    box-shadow:0 0 0 3px rgba(59,130,246,.08)
+}
+textarea{
+    min-height:150px;
+    resize:vertical
+}
+footer{
+    border-top:1px solid var(--border);
+    padding:30px 0
+}
+.footer-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center
+}
+.footer-content p{
+    color:var(--muted);
+    font-size:.75rem
+}
+.socials{
+    display:flex;
+    gap:20px
+}
+.socials a{
+    color:var(--muted);
+    font-size:.75rem;
+    transition:.3s
+}
+.socials a:hover{
+    color:white
+}
+.reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:.8s ease
+}
+.reveal.show{
+    opacity:1;
+    transform:translateY(0)
+}
+@media(max-width:950px){
+    .projects-grid{grid-template-columns:repeat(2,1fr)}
+    .services-grid{grid-template-columns:repeat(2,1fr)}
+    .service{border-bottom:1px solid var(--border)}
+    .contact-box{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+    .menu-btn{display:block}
+    nav{position:absolute;
+        top:75px;
+        left:0;
+        width:100%;
+        display:none;
+        flex-direction:column;
+        gap:0;
+        background:rgba(5,7,13,.97);
+        border-bottom:1px solid var(--border)
+    }
+    nav.active{display:flex}
+    nav a{padding:15px 5%}
+    .hero h1{
+        font-size:3.5rem;
+        letter-spacing:-3px
+    }
+    .hero-description{font-size:.9rem}
+    .hero-stats{gap:25px}
+    .about-grid,.skills-grid,.projects-grid{grid-template-columns:1fr}
+    .services-grid{grid-template-columns:1fr}
+    .service{border-right:none}
+    .contact-box{padding:25px}
+    .footer-content{
+        flex-direction:column;
+        gap:15px
+    }
+}
+@media(max-width:400px){
+    .hero h1{font-size:3rem}
+    .hero-buttons{
+        flex-direction:column;
+        align-items:stretch
+    }
+    .btn{width:100%}
+}
+
+    </style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mike | Portfolio</title>
+        <meta name="description" content="Portfolio professionnel de Mike - Développement Web, Python, Business et projets numériques.">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class="header">
+            <div class="container nav">
+                <a href="#home" class="logo">MIKE<span> . TECH</span></a>
+                <button class="menu-btn" id="menuBtn" aria-label="Ouvrir le menu"></button>
+                <nav id="navMenu">
+                    <a href="#home">Accueil</a>
+                    <a href="#about">À propos</a>
+                    <a href="#skills">Compétences</a>
+                    <a href="#projects">Projets</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <section id="home" class="hero">
+                <div class="container hero-content reveal">
+                    <div class="availability"><span></span> Disponible pour de nouveaux projets</div>
+                    <p class="hero-intro">Bonjour, je suis</p>
+                    <h1>Mike<br><span class="gradient">Développeur &amp; Créateur</span></h1>
+                    <p class="hero-description">
+                        Je transforme des idées en solutions numériques modernes, performantes et utiles.
+                        Je m'intéresse particulièrement au développement web, à Python, à l'intelligence artificielle et au business digital.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">Voir mes projets <span>↗</span></a>
+                        <a href="#contact" class="btn btn-secondary">Me contacter</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div><strong>10+</strong><span>Projets</span></div>
+                        <div><strong>5+</strong><span>Technologies</span></div>
+                        <div><strong>∞</strong><span>Idées</span></div>
+                    </div>
+                </div>
+            </section>
+            <section id="about" class="section">
+                <div class="container">
+                    <div class="section-heading reveal">
+                        <span>01 — À PROPOS</span>
+                        <h2>Construire. <span>Apprendre.</span> Innover.</h2>
+                    </div>
+                    <div class="about-grid">    
+                        <div class="about-text reveal">
+                            <p class="big-text">Je suis un étudiant en informatique passionné par la création de solutions numériques.</p>
+                            <p>J'aime apprendre en construisant des projets concrets. Mon objectif est de développer progressivement des compétences solides
+                                en programmation, développement web, automatisation et entrepreneuriat. Je suis toujours disponible pour de nouveaux
+                                projets et de nouvelles compétences . Je suis passionné par absolumment tout ce qui est innovation et numérisation . 
+                                C'est plus qu'une passion ,<span><strong> c'est mon style de vie </strong></span> </p>
+                            <p>Chaque projet présenté ici représente une étape de mon évolution.</p>
+                        </div>
+                        <div class="about-card reveal">
+                            <div class="card-number">01</div>
+                            <h3>Ma vision</h3>
+                            <p>Créer des produits simples à utiliser, élégants et capables de résoudre de vrais problèmes.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="skills" class="section dark-section">
+                <div class="container">
+                    <div class="section-heading reveal">
+                        <span>02 — COMPÉTENCES</span>
+                        <h2>Mon <span>stack.</span></h2>
+                    </div>
+                    <div class="skills-grid">
+                        <div class="skill-card reveal">
+                            <div class="skill-header">
+                                <h3>HTML / CSS</h3>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" data-progress="90">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-card reveal">
+                            <div class="skill-header">
+                                <h3>JavaScript</h3>
+                                <span>65%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" data-progress="65"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card reveal">
+                            <div class="skill-header">
+                                <h3>Python</h3>
+                                <span>70%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" data-progress="70"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card reveal">
+                            <div class="skill-header">
+                                <h3>SQL</h3>
+                                <span>40%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" data-progress="40"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card reveal">
+                            <div class="skill-header">
+                                <h3>Git / GitHub</h3>
+                                <span>70%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" data-progress="70"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card reveal">
+                            <div class="skill-header">
+                                <h3>UI / UX</h3>
+                                <span>65%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" data-progress="65"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="projects" class="section">
+                <div class="container">
+                    <div class="section-heading reveal">
+                        <span>03 — PORTFOLIO</span>
+                        <h2>Mes <span>projets.</span></h2>
+                        <p>Une sélection de projets réalisés pendant mon parcours.</p>
+                    </div>
+                    <div class="filters reveal">
+                        <button class="filter active" data-filter="all">Tous</button>
+                        <button class="filter" data-filter="web">Web</button>
+                        <button class="filter" data-filter="python">Python</button>
+                        <button class="filter" data-filter="business">Business</button>
+                        <button class="filter" data-filter="other">Autres</button>
+                    </div>
+                    <div class="projects-grid">
+                        <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Portfolio de Mike</h3>
+                                <p>Le site qui présente toutes mes expériences et tous mes projets (site actuel).</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Site du Menu de Restaurant Le Gourmet</h3>
+                                <p>Petite faim mais vous ne savez pas quoi le restau propose ? Aors par ici </p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Bloc Notes web</h3>
+                                <p>Pour stocker vos idées en toute sécurité</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Calculatrice web</h3>
+                                <p>Pour effectuer tous vos caculs</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Catalogue de produits web</h3>
+                                <p>Pour présenter les produits de votre boutique de manière plus efficace</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Convertisseurs de mesure web</h3>
+                                <p>Pour effectuer toutes vos conversions</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Convertisseurs de monnaie web</h3>
+                                <p>Pour effectuer toutes vos conversions financières</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Gestionnaire de message</h3>
+                                <p>Pour gérer , envoyer et recevoir vos messages</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Gestionnaire de taches</h3>
+                                <p>Pour gérer et manipuer vos taches</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Gestionnaire de profil</h3>
+                                <p>Pour gérer et manipuer votre profil sur n'importe quel site</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Le Gourmet : Commande et réservation</h3>
+                                <p>Pour passer vos commandes en toute transparence</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                         <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Mike Blog web</h3>
+                                <p></p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                         <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Mike Immo Web </h3>
+                                <p>Besoin d'une maison ? C'est votre meileur choix</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                         <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Le Gourmet : Commande et réservation</h3>
+                                <p>Pour passer vos commandes en toute transparence</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                         <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Quizz Interactif</h3>
+                                <p>Mettez vos connaissances à l'épreuve</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                         <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Site de réservation web</h3>
+                                <p>Pour faire vos réservations pour location d'hotels , voiture et autres</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                         <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>SwiftDrive </h3>
+                                <p>Votre site de location de voitures</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                         <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Authentificator Pro</h3>
+                                <p>Votre système d'authentification</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                         <article class="project reveal" data-category="web">
+                            <div class="project-image">
+                                <span>01</span>
+                                <div class="project-icon">◈</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">WEB DEVELOPMENT</span>
+                                <h3>Time Manager</h3>
+                                <p>Pour manipuler votre temps de manière efficace</p>
+                                <div class="technologies">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                    <a href="#" target="_blank">Live Demo ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="python">
+                            <div class="project-image">
+                                <span>02</span>
+                                <div class="project-icon">λ</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">PYTHON</span>
+                                <h3>Calculatrice scientifique Python</h3>
+                                <p>Logiciel vous permettant d'effectuer tous les calculs les plus complexes</p>
+                                <div class="technologies">
+                                    <span>Python</span>
+                                    <span>SQLite</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="python">
+                            <div class="project-image">
+                                <span>02</span>
+                                <div class="project-icon">λ</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">PYTHON</span>
+                                <h3>Chronomètre et minuteur Python</h3>
+                                <p></p>
+                                <div class="technologies">
+                                    <span>Python</span>
+                                    <span>SQLite</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="python">
+                            <div class="project-image">
+                                <span>02</span>
+                                <div class="project-icon">λ</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">PYTHON</span>
+                                <h3>Générateur de citation </h3>
+                                <p></p>
+                                <div class="technologies">
+                                    <span>Python</span>
+                                    <span>SQLite</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="python">
+                            <div class="project-image">
+                                <span>02</span>
+                                <div class="project-icon">λ</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">PYTHON</span>
+                                <h3>Table de multipllication Python</h3>
+                                <p></p>
+                                <div class="technologies">
+                                    <span>Python</span>
+                                    <span>SQLite</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="python">
+                            <div class="project-image">
+                                <span>02</span>
+                                <div class="project-icon">λ</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">PYTHON</span>
+                                <h3>TIC TAC TOE Game</h3>
+                                <p></p>
+                                <div class="technologies">
+                                    <span>Python</span>
+                                    <span>SQLite</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="python">
+                            <div class="project-image">
+                                <span>02</span>
+                                <div class="project-icon">λ</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">PYTHON</span>
+                                <h3>TODO LIST</h3>
+                                <p>Pour gérer toutes vos taches</p>
+                                <div class="technologies">
+                                    <span>Python</span>
+                                    <span>SQLite</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="business">
+                            <div class="project-image">
+                                <span>03</span>
+                                <div class="project-icon">$</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">BUSINESS</span>
+                                <h3>Panier E-commerce</h3>
+                                <p>Utile pour tous vos sites et projets entrepreneuriaux ou e-commerce.</p>
+                                <div class="technologies">
+                                    <span>E-commerce</span>
+                                    <span>Marketing</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Découvrir ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                         <article class="project reveal" data-category="business">
+                            <div class="project-image">
+                                <span>03</span>
+                                <div class="project-icon">$</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">BUSINESS</span>
+                                <h3>Page de présentation de produits</h3>
+                                <p>Utile pour tous vos sites et projets entrepreneuriaux ou e-commerce.</p>
+                                <div class="technologies">
+                                    <span>E-commerce</span>
+                                    <span>Marketing</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Découvrir ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                         <article class="project reveal" data-category="business">
+                            <div class="project-image">
+                                <span>03</span>
+                                <div class="project-icon">$</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">BUSINESS</span>
+                                <h3>TechStore</h3>
+                                <p>Votre site de vente de produits Tech</p>
+                                <div class="technologies">
+                                    <span>E-commerce</span>
+                                    <span>Marketing</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Découvrir ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="business">
+                            <div class="project-image">
+                                <span>03</span>
+                                <div class="project-icon">$</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">BUSINESS</span>
+                                <h3>Platefoeme SaaS</h3>
+                                <p>Votre site vous permettant de gérer vos ventes en ligne</p>
+                                <div class="technologies">
+                                    <span>E-commerce</span>
+                                    <span>Marketing</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">Découvrir ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="others">
+                            <div class="project-image">
+                                <span>04</span>
+                                <div class="project-icon">AI</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">AUTOMATISATION</span>
+                                <h3>Projet GENESYS</h3>
+                                <p>Projet permettant de manipuler automatiquement les données d'un établissement</p>
+                                <div class="technologies">
+                                    <span>Python</span>
+                                    <span>AI</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="others">
+                            <div class="project-image">
+                                <span>04</span>
+                                <div class="project-icon">AI</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">AUTOMATISATION</span>
+                                <h3>CV Builder</h3>
+                                <p>Pour générer automatiquement votre CV de manière professionnelle</p>
+                                <div class="technologies">
+                                    <span>Python</span>
+                                    <span>AI</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        
+                        
+                        
+                        <article class="project reveal" data-category="others">
+                            <div class="project-image">
+                                <span>04</span>
+                                <div class="project-icon">AI</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">IA / MACHINE LEARNING</span>
+                                <h3>Projet Intelligence Artificielle</h3>
+                                <p>Projet utilisant Python, l'intelligence artificielle ou le Machine Learning.</p>
+                                <div class="technologies">
+                                    <span>Python</span>
+                                    <span>AI</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="other">
+                            <div class="project-image">
+                                <span>04</span>
+                                <div class="project-icon">+</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">AUTRE</span>
+                                <h3>Nouveau projet</h3>
+                                <p>Cet emplacement est réservé à ton prochain projet.</p>
+                                <div class="technologies">
+                                    <span>Innovation</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#">En savoir plus ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project reveal" data-category="others">
+                            <div class="project-image">
+                                <span>04</span>
+                                <div class="project-icon">AI</div>
+                            </div>
+                            <div class="project-info">
+                                <span class="project-category">AUTOMATISATION</span>
+                                <h3>Générateur de mot de passe</h3>
+                                <p>Pour générer vos mots de passe de facon automatique</p>
+                                <div class="technologies">
+                                    <span>Python</span>
+                                    <span>AI</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank">GitHub ↗</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+            <section id="services" class="section dark-section">
+                <div class="container">
+                    <div class="section-heading reveal">
+                        <span>04 — SERVICES</span>
+                        <h2>Ce que je <span>crée.</span></h2>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service reveal">
+                            <div class="service-number">01</div>
+                            <h3>Développement Web</h3>
+                            <p>Sites vitrines, portfolios, landing pages et applications web modernes.</p>
+                        </div>
+                        <div class="service reveal">
+                            <div class="service-number">02</div>
+                            <h3>Applications Python</h3>
+                            <p>Scripts, automatisation, applications et outils personnalisés.</p>
+                        </div>
+                        <div class="service reveal">
+                            <div class="service-number">03</div>
+                            <h3>Design numérique</h3>
+                            <p>Interfaces modernes et expériences utilisateur simples et efficaces.</p>
+                        </div>
+                        <div class="service reveal">
+                            <div class="service-number">04</div>
+                            <h3>Digital Business</h3>
+                            <p>Création de solutions numériques pour projets entrepreneuriaux.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="contact" class="section">
+                <div class="container">
+                    <div class="contact-box reveal">
+                        <div class="contact-left">
+                            <span>05 — CONTACT</span>
+                            <h2>Un projet en tête ?</h2>
+                            <p>Parlons-en. Je suis toujours intéressé par de nouveaux projets, collaborations et opportunités.</p>
+                            <div class="contact-details">
+                                <div><small>Email</small>
+                                    <strong>mikeuchiwa0726@gmail.com</strong>
+                                </div>
+                                <div>
+                                    <small>GitHub</small>
+                                    <strong>github.com/Mikeuchiwa</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <form id="contactForm">
+                            <input type="text" id="name" placeholder="Votre nom" required>
+                            <input type="email" id="email" placeholder="Votre email" required>
+                            <input type="text" id="subject" placeholder="Sujet" required>
+                            <textarea id="message" placeholder="Votre message..." required></textarea>
+                            <button type="submit" class="btn btn-primary">Envoyer le message ↗</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div class="container footer-content">
+                <div class="logo">MIKE<span> . TECH</span>
+                </div>
+                <p>© <span id="year"></span> Mike. Tous droits réservés.</p>
+                <div class="socials">
+                    <a href="#" target="_blank">GitHub</a>
+                    <a href="#" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </footer>
+        <script>
+            /* =========================
+MENU MOBILE
+========================= */
+const menuBtn = document.getElementById("menuBtn");
+const navMenu = document.getElementById("navMenu");
+menuBtn.addEventListener("click", () => 
+    {
+        navMenu.classList.toggle("active");
+    }
+);
+document.querySelectorAll("#navMenu a").forEach(link => 
+    {
+        link.addEventListener("click", () => 
+            {
+                navMenu.classList.remove("active");
+            }
+        );
+    }
+);
+/* =========================
+FILTRE DES PROJETS
+========================= */
+const filters = document.querySelectorAll(".filter");
+const projects = document.querySelectorAll(".project");
+filters.forEach(filter => 
+    {
+        filter.addEventListener("click", () => 
+            {
+                const category = filter.dataset.filter;
+                filters.forEach(button => 
+                    {
+                        button.classList.remove("active");
+                    }
+                );
+                filter.classList.add("active");
+                projects.forEach(project => 
+                    {
+                        const projectCategory = project.dataset.category;
+                        if (category === "all" || projectCategory === category) {
+                            project.style.display = "block";
+                        } 
+                        else {
+                            project.style.display = "none";
+                        }
+                    }
+                );
+            }
+        );
+    }
+);
+/* =========================
+BARRES DE COMPÉTENCES
+========================= */
+const progressBars = document.querySelectorAll(".progress-bar");
+const skillObserver = new IntersectionObserver(
+    entries => 
+        {
+            entries.forEach(entry => 
+                {
+                    if (entry.isIntersecting) {
+                        const progress = entry.target.dataset.progress;
+                        entry.target.style.width = progress + "%";
+                        skillObserver.unobserve(entry.target);
+                    }
+                }
+            );
+        },{ 
+            threshold: 0.5 
+        }
+);
+progressBars.forEach(bar => 
+    {
+        skillObserver.observe(bar);
+    }
+);
+/* =========================
+ANIMATION AU SCROLL
+========================= */
+const revealElements = document.querySelectorAll(".reveal");
+const revealObserver = new IntersectionObserver(
+    entries => 
+        {
+            entries.forEach(entry => 
+                {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                        revealObserver.unobserve(entry.target);
+                    }
+                }
+            );
+        },{ 
+            threshold: 0.12 
+        }
+);
+revealElements.forEach(element => 
+    {
+        revealObserver.observe(element);
+    }
+);
+/* =========================
+FORMULAIRE
+========================= */
+const contactForm = document.getElementById("contactForm");
+contactForm.addEventListener("submit", event => 
+    {
+        event.preventDefault();
+        const name = document.getElementById("name").value;
+        alert(
+            `Merci ${name} ! \n\n` +
+            "Ton message a bien été préparé."
+        );
+        contactForm.reset();
+    }
+);
+/* =========================
+ANNÉE AUTOMATIQUE
+========================= */
+document.getElementById("year").textContent = new Date().getFullYear();
+        </script>
+    </body>
+</html>
